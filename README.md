@@ -1,7 +1,5 @@
 # dotnet-s3-example
-sample code for object CRUD in an S3 bucket (aws/minio/ceph/etc...)
-
-just tinkering - a work in progress
+I had not worked with S3 storage before and wanted to learn some basics.  Minio is free, fast and easy to use so I am starting with that.  Minio has a nice API/client offering availble via nuget - but since S3 is more-or-less an open standard, I thought it would be  interesting to use the AWS S3 API against a minio endpoint.  In this repo i'll spin up a minio endpoint via docker, and write some very simple .Net client code to perform CRUD operations on buckets and objects.
 
 # Instructions #
 
@@ -19,6 +17,6 @@ docker compose up -d
 * Log in with the username `minio` and the password `snickerdoodle`
 * Under `Object Browser` - click `Create a Bucket` and call it `pail` and hit the `Create Bucket` button
 * Under access keys click `Create access key +` and then `Create`.  As prompted - make note of the access key and secret key as they will not be viewable from the console again.
-* Set two local environmental variables `AppSettings__AccessKey` and `AppSettings__SecretKey` and populate them with the respective values you copied from the previous step.  *You may need to restart your development tools for the new environmental variables to load*
+* Set two local environmental variables `S3Demo__AccessKey` and `S3Demo__SecretKey` and populate them with the respective values you copied from the previous step.  *You may need to restart your development tools for the new environmental variables to load*
 
 
