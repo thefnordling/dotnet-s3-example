@@ -22,9 +22,10 @@ public class Program
         config.GetSection(AppSettings.CONFIG).Bind(settings);
 
         var p = new Program(settings);
-        await p.ListBucketsAsync().ConfigureAwait(false);        
+        await p.ListBucketsAsync().ConfigureAwait(false);
         var created = await p.CreateBucketAsync().ConfigureAwait(false);
         await p.PutCatInBucketAsync(created).ConfigureAwait(false);
+        await p.GetCatFromBucketAsync(created).ConfigureAwait(false);
         await p.ClearBucketAsync(created).ConfigureAwait(false);
         await p.DeleteBucketAsync(created).ConfigureAwait(false);
     }
@@ -164,5 +165,27 @@ public class Program
             Key = Settings.CatPicture
         };
         await xu.UploadAsync(xur).ConfigureAwait(false);
+    }
+
+    public async Task GetCatFromBucketAsync(string bucket)
+    {
+        var gor = new Amazon.S3.Model.GetObjectRequest
+        {
+            BucketName = bucket,
+            Key = Settings.CatPicture
+        };
+
+        var response = await S3.GetObjectAsync(gor).ConfigureAwait(false);
+
+        var fileName = $"copy of {Settings.CatPicture}";
+        if (File.Exists(fileName))
+            File.Delete(fileName);
+
+        using (var fs = File.Create(fileName))
+        {
+            response.ResponseStream.CopyTo(fs);
+        }
+
+        File.Delete(fileName);
     }
 }
