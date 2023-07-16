@@ -18,5 +18,7 @@ docker compose up -d
 * Under `Object Browser` - click `Create a Bucket` and call it `pail` and hit the `Create Bucket` button
 * Under access keys click `Create access key +` and then `Create`.  As prompted - make note of the access key and secret key as they will not be viewable from the console again.
 * Set two local environmental variables `S3Demo__AccessKey` and `S3Demo__SecretKey` and populate them with the respective values you copied from the previous step.  *You may need to restart your development tools for the new environmental variables to load*
+* change directory to `./src/app`
+* execute `dotnet run`
 
 
